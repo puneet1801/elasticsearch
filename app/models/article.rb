@@ -3,6 +3,8 @@ class Article < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
+  paginates_per 10
+
   def self.search(query)
     __elasticsearch__.search(
       {

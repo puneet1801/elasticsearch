@@ -2,7 +2,7 @@
 
 <h1>Articles</h1>
 
-<table>
+<table border='1'>
   <thead>
     <tr>
       <th>Title</th>
@@ -24,6 +24,7 @@
   </tbody>
 </table>
 
+<%= paginate @articles %>
 <br>
 
 <%= link_to 'New Article', new_article_path %>

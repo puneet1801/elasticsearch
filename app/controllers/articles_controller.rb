@@ -4,7 +4,8 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    params[:page] = 1 if params[:page].blank?
+    @articles = Article.all.page params[:page]
   end
 
   # GET /articles/1
