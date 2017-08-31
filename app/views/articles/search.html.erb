@@ -1,10 +1,10 @@
 <h1>Articles Search</h1>
-
 <%= form_for search_articles_path, method: :get do |f| %>
   <p>
     <%= f.label "Search for" %>
     <%= text_field_tag :q, params[:q] %>
     <%= submit_tag "Go", name: nil %>
+    <%= hidden_field_tag :s, true if params.has_key?(:s) %>
   </p>
 <% end %>
 
@@ -15,7 +15,7 @@
         <%= link_to article.try(:highlight).try(:title) ? article.highlight.title[0].html_safe : article.title,
           controller: "articles",
           action: "show",
-          id: article._id%>
+          id: params.has_key?(:s) ? article.id : article._id%>
       </h3>
       <% if article.try(:highlight).try(:description) %>
         <% article.highlight.description.each do |snippet| %>

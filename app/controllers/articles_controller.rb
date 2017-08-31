@@ -4,8 +4,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    params[:page] = 1 if params[:page].blank?
-    @articles = Article.all.page params[:page]
+    @articles = Article.all.page params[:page] ||= 1
   end
 
   # GET /articles/1
@@ -65,7 +64,11 @@ class ArticlesController < ApplicationController
   def search
     if params[:q].nil?
       @articles = []
+    elsif !params[:s].nil?
+      puts "====== Manual search ======"
+      @articles = Article.manual_search params[:q]
     else
+      puts "====== Elastic search ======"
       @articles = Article.search params[:q]
     end
   end
